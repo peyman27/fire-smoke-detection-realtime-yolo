@@ -4,7 +4,7 @@ This project provides a simple real-time fire and smoke detection system using a
 
 ## Demo Preview
 
-![Demo](assets/demo.mp4)
+[Watch the demo video](assets/demo.mp4)
 
 ## Installation
 
@@ -20,6 +20,7 @@ https://pytorch.org/get-started/locally/
 
 run 
 main.py
+
 
 
 
