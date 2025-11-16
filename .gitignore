@@ -1,0 +1,10 @@
+# Python caches
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Large files / outputs 
+*.mp4
+*.avi
+runs/
