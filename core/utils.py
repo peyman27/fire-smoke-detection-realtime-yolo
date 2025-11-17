@@ -1,4 +1,3 @@
-# core/utils.py
 import cv2
 import os
 import time
@@ -14,9 +13,6 @@ def draw_detections(img, boxes, confs, classes, names):
 
 
 def is_fire_or_smoke_detected(names, classes):
-    """
-    بررسی اینکه آیا آتش یا دود شناسایی شده است یا خیر.
-    """
     detected_labels = [names.get(cls, str(cls)) for cls in classes]
     detected_fire = any(lbl.lower() == "fire" for lbl in detected_labels)
     detected_smoke = any(lbl.lower() == "smoke" for lbl in detected_labels)
@@ -30,3 +26,4 @@ def save_alert_image(frame, save_dir="alerts"):
     path = os.path.join(save_dir, filename)
     cv2.imwrite(path, frame)
     return path
+
