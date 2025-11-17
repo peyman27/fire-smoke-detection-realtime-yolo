@@ -1,4 +1,3 @@
-# core/models.py
 from ultralytics import YOLO
 import os
 import glob
@@ -6,18 +5,11 @@ import numpy as np
 import torch
 
 def find_latest_model(models_dir="models"):
-    """
-    پیدا کردن جدیدترین مدل برای استفاده:
-    - اول دنبال runs/**/weights/best.pt
-    - بعد دنبال models/best.pt
-    """
-    # ۱. جدیدترین مدل از runs
     runs_candidates = glob.glob(os.path.join("runs", "**", "weights", "best.pt"), recursive=True)
     if runs_candidates:
         latest_run = max(runs_candidates, key=os.path.getmtime)
         return os.path.abspath(latest_run)
 
-    # ۲. مدل fallback در پوشه models
     fallback = os.path.join(models_dir, "best.pt")
     if os.path.isfile(fallback):
         return os.path.abspath(fallback)
@@ -26,9 +18,6 @@ def find_latest_model(models_dir="models"):
 
 
 def load_model(model_path=None, device=None):
-    """
-    مدل را بارگذاری می‌کند. اگر مسیر داده نشود، جدیدترین مدل را خودش پیدا می‌کند.
-    """
     if model_path is None:
         model_path = find_latest_model()
     if model_path is None:
@@ -48,10 +37,6 @@ def load_model(model_path=None, device=None):
 
 
 def detect_on_frame(model, frame, conf=0.35, iou=0.45, device=None, imgsz=640):
-    """
-    اجرای inference روی یک فریم BGR (numpy).
-    بازگشت: dict شامل باکس‌ها، اطمینان، کلاس‌ها و نام‌ها
-    """
     kwargs = {"conf": conf, "iou": iou, "imgsz": imgsz}
     if device:
         kwargs["device"] = device
@@ -75,3 +60,4 @@ def detect_on_frame(model, frame, conf=0.35, iou=0.45, device=None, imgsz=640):
             classes.append(int(cls))
 
     return {"boxes": boxes, "confs": confs, "classes": classes, "names": names}
+
